@@ -1,220 +1,284 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Configures the format of the prompt.
 format = """
 $os\
 $username\
 $directory\
 ${custom.dir_tail}\
 $git_branch\
+$fill\
+$c\
+$dotnet\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+$elixir\
+$elm\
+$gradle\
+$julia\
+$nim\
+$scala\
+$time\
+$battery\
 $line_break\
 $character"""
 
+# Sets the palette to "one_dark".
+palette = 'one_dark'
 
-palette = 'catppuccin_macchiato'
+# Sets the colors of the "one_dark" palette.
+[palettes.one_dark]
+mono0 = '#d7dae0' # terminal white, from the One Dark Pro VSCode theme.
+mono1 = '#abb2bf' # syntax_fg.
+mono2 = '#828997'
+mono3 = '#5c6370'
+mono4 = '#3f4451' # terminal black, from the One Dark Pro VSCode theme.
+color_red0 = '#e06c75'
+color_red1 = '#be5046'
+color_red2 = '#d31334'
+color_green = '#98c379'
+color_yellow = '#e5c07b'
+color_blue = '#61afef'
+color_purple = '#c678dd'
+color_cyan = '#56b6c2'
+color_orange = '#d19a66'
+syntax_fg = '#abb2bf'
+syntax_bg = '#282c34'
+color_bg2 = '#665c54'
+syntax_gutter = '#647382'
+syntax_accent = '#528cff'
 
+# Module that displays the current OS.
 [os]
-disabled = false
-style = "bg:mauve fg:crust"
-format = "[ $symbol ]($style)"
+disabled = false # Disabled by default
+style = "fg:mono0 bg:color_red1"
+format = '[ $symbol ]($style)'
 
+# Sets custom symbols for each OS.
 [os.symbols]
-Windows = ""
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
 Alpine = ""
 Amazon = ""
-Android = ""
-AOSC = ""
-Arch = "󰣇"
-Artix = "󰣇"
+Android = "󰀲"
+Arch = ""
 CentOS = ""
 Debian = "󰣚"
+EndeavourOS = ""
+Fedora = "󰣛"
+FreeBSD = "󰣠"
+Gentoo = "󰣨"
+Illumos = ""
+Linux = "󰌽"
+Macos = "󰍲"
+Manjaro = "󱘊"
+Mint = "󰣭"
+NixOS = "󱄅"
+OpenBSD = ""
+openSUSE = ""
+Pop = ""
+Raspbian = ""
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
+Redox = "R"
+Solus = ""
+SUSE = ""
+Ubuntu = "󰕈"
+Unknown = ""
+Windows = "󰍲"
 
+# Module that displays the current username.
 [username]
 show_always = true
-style_user = "bg:pink fg:crust"
-style_root = "bg:pink fg:crust"
-format = '[ $user ]($style)'
+style_user = "bold fg:mono0 bg:color_red1"
+style_root = "bold fg:mono0 bg:color_purple"
+format = '[$user ]($style)'
 
-[hostname]
-ssh_only = false
-style = "bg:pink fg:crust"
-format = '[ $hostname ]($style)'
-
-[memory_usage]
-disabled = false
-threshold = -1
-format = '[| MEM: ${ram}( | ${swap}) ]($style)'
-style = 'bg:pink fg:crust bold'
-
-[localip]
-ssh_only = false
-style = 'bg:pink fg:crust bold'
-format = '[| $localipv4 ]($style)'
-disabled = false
-
+# Module that displays the current directory.
 [directory]
-style = "bg:maroon fg:crust"
+style = "bold fg:syntax_bg bg:color_green"
 format = "[ $path ]($style)"
-truncation_length = 2
+truncation_length = 1
 truncate_to_repo = false
 
 [custom.dir_tail]
 when = ''' ! git rev-parse --is-inside-work-tree >/dev/null 2>&1 '''
 command = "true"
-format = "[](fg:peach)"
+format = ""
 
+# Module that displays the current git branch.
 [git_branch]
 symbol = ""
-style = "bg:pink fg:crust"
-format = '[[ $symbol $branch ](fg:crust bg:pink)]($style)'
+style = "bg:color_yellow"
+format = '[[ $symbol $branch ](fg:syntax_bg bg:color_yellow)]($style)'
 
+# Language specific modules
 [nodejs]
 symbol = ""
-format = '[[ $symbol $version ](fg:crust bg:green)]($style)'
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[c]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[dotnet]
+symbol = "󰪮"
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
 
 [rust]
 symbol = ""
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
 
 [golang]
 symbol = ""
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[php]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[java]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[kotlin]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
 
 [python]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol( $version) ](fg:syntax_bg bg:color_green)]($style)'
 
-[line_break]
-disabled = false
+[elixir]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
 
+[elm]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[gradle]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[julia]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
+
+[scala]
+symbol = " "
+style = "bg:color_green"
+format = '[[ $symbol ($version) ](fg:syntax_bg bg:color_green)]($style)'
+
+# Module that fills the space between the left and right segments.
+[fill]
+symbol = "█"
+style = 'mono4'
+
+# Module that displays the time.
+[time]
+disabled = false # Disabled by default
+use_12hr = false # Disable for 24h format without seconds
+style = "bg:color_orange"
+format = '[[ 󰥔 $time ](fg:syntax_bg bg:color_orange)]($style)'
+
+# Module that displays the battery level and status.
+[battery]
+format = '[ $symbol $percentage ]($style)'
+
+# Battery symbols and colors for each threshold.
+[[battery.display]]
+threshold = 10
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁺"
+charging_symbol = "󰢜"
+
+[[battery.display]]
+threshold = 20
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁻"
+charging_symbol = "󰂆"
+
+[[battery.display]]
+threshold = 30
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁼"
+charging_symbol = "󰂇"
+
+[[battery.display]]
+threshold = 40
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁽"
+charging_symbol = "󰂈"
+
+[[battery.display]]
+threshold = 50
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁾"
+charging_symbol = "󰢝"
+
+[[battery.display]]
+threshold = 60
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁿"
+charging_symbol = "󰂉"
+
+[[battery.display]]
+threshold = 70
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰂀"
+charging_symbol = "󰢞"
+
+[[battery.display]]
+threshold = 80
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰂁"
+charging_symbol = "󰂊"
+
+[[battery.display]]
+threshold = 90
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰂂"
+charging_symbol = "󰂋"
+
+[[battery.display]]
+style = "bold bg:color_green fg:syntax_bg"
+discharging_symbol = "󰁹"
+charging_symbol = "󰂅"
+threshold = 100
+
+# New line character
 [character]
-disabled = false
-success_symbol = '[\$](bold fg:blue)'
-error_symbol = '[\$](bold fg:red)'
-vimcmd_symbol = '[\$](bold fg:blue)'
-vimcmd_replace_one_symbol = '[\$](bold fg:lavender)'
-vimcmd_replace_symbol = '[\$](bold fg:lavender)'
-vimcmd_visual_symbol = '[\$](bold fg:yellow)'
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-[palettes.catppuccin_frappe]
-rosewater = "#f2d5cf"
-flamingo = "#eebebe"
-pink = "#f4b8e4"
-mauve = "#ca9ee6"
-red = "#e78284"
-maroon = "#ea999c"
-peach = "#ef9f76"
-yellow = "#e5c890"
-green = "#a6d189"
-teal = "#81c8be"
-sky = "#99d1db"
-sapphire = "#85c1dc"
-blue = "#8caaee"
-lavender = "#babbf1"
-text = "#c6d0f5"
-subtext1 = "#b5bfe2"
-subtext0 = "#a5adce"
-overlay2 = "#949cbb"
-overlay1 = "#838ba7"
-overlay0 = "#737994"
-surface2 = "#626880"
-surface1 = "#51576d"
-surface0 = "#414559"
-base = "#303446"
-mantle = "#292c3c"
-crust = "#232634"
-
-[palettes.catppuccin_latte]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
-
-[palettes.catppuccin_macchiato]
-rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
+success_symbol = '[\$](bold fg:mono0)'
+error_symbol = '[\$](bold fg:color_red1)'
+vimcmd_symbol = '[\$](bold fg:syntax_accent)'
+vimcmd_replace_one_symbol = '[\$](bold fg:color_purple)'
+vimcmd_replace_symbol = '[\$](bold fg:color_purple)'
+vimcmd_visual_symbol = '[\$](bold fg:color_yellow)'
